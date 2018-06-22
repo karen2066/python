@@ -1,3 +1,7 @@
+function hrefBack() {
+    history.go(-1);
+};
+
 function getCookie(name) {
     var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
     return r ? r[1] : undefined;
@@ -33,7 +37,43 @@ $.get('/house/area_facility/', function (msg) {
         // 拿到页面标签添加html属性
         $('.house-facility-list').html(facility_str)
 
-})
+});
+
+
+// 发布新房源
+$(document).ready(function(){
+    $('#form-house-info').submit(function (){
+        $.post('/house/newhouse/', $(this).serialize(), function (msg) {
+            if(msg.code == '200'){
+                $('#form-house-info').hide();
+                $('#form-house-image').show();
+                $('#house-id').val(msg.house_id)
+            }
+        });
+        return false;
+    });
+
+    // 上传图片
+    $('#form-house-image').submit(function(){
+
+        $(this).ajaxSubmit({
+            url:'/house/house_images/',
+            type:'POST',
+            dataType:'json',
+            success:function(msg){
+                if(msg.code == '200'){
+                    var img_html = '<img src="/static/' + msg.image_url + '">'
+                    $('.house-image-cons').append(img_html)
+                }
+            },
+            error:function(msg){
+                alert('请求失败')
+            }
+        });
+        return false
+    });
+
+});
 
 
 

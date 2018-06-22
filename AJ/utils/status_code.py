@@ -17,3 +17,7 @@ USER_CHANGE_PRONAME_IS_INVALID = {'code': '1008', 'msg': '用户名重复'}
 
 USER_AUTH_DATA_IS_NOT_NULL = {'code': '1009', 'msg': '实名认证不能为空'}
 USER_AUTH_ID_CARD_IS_NOT_VALID = {'code': '1010', 'msg': '身份证信息错误'}
+
+# 订单模块
+ORDER_BEGIN_END_DATA_NOT_NULL = {'code': '1100', 'msg': '房屋预约时间不能为空'}
+ORDER_BEGIN_DATA_GT_END_DATE_ERROR = {'code': '1101', 'msg': '开始时间大于结束时间，请重新提交'}

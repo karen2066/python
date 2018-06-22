@@ -46,4 +46,29 @@ $(document).ready(function(){
             $(".order-amount>span").html(amount.toFixed(2) + "(共"+ days +"晚)");
         }
     });
-})
+});
+// 显示页面
+house_id = location.search.split('=')[1]
+$.get('/house/detail/' + house_id +'/', function(msg){
+    if(msg.code == '200'){
+        $('.house_text_p span').text(msg.house_info.price)
+        $('.house-text h3').text(msg.house_info.title)
+        $('.house-info img').attr('src', '/static/' + msg.house_info.images[0])
+    }
+});
+
+// 提交订单
+function booking_submit(){
+    var startDate = $("#start-date").val();
+    var endDate = $("#end-date").val();
+    var house_id = location.search.split('=')[1]
+
+    $.post('/order/create_order/',
+            {'begin_date': startDate, 'end_date': endDate, 'house_id': house_id},
+            function(msg){
+                alert(msg)
+            });
+}
+
+
+

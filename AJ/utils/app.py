@@ -7,6 +7,7 @@ from flask_session import Session
 
 from App.house_views import house_blueprint
 from App.models import db
+from App.order_views import order_blueprint
 from App.user_views import user_blueprint
 from utils.setting import BASE_DIR
 
@@ -21,6 +22,7 @@ def create_app():
                 template_folder=templates_dir)
     app.register_blueprint(blueprint=user_blueprint, url_prefix='/user')
     app.register_blueprint(blueprint=house_blueprint, url_prefix='/house')
+    app.register_blueprint(blueprint=order_blueprint, url_prefix='/order')
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@localhost:3306/aj'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
